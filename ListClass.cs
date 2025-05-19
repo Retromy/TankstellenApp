@@ -2,23 +2,38 @@
 
 namespace TankstellenApp
 {
+    // Diese Klasse kapselt die Logik zum Erzeugen und Laden der Tankstellenliste.
     public class ListClass
     {
-        internal static List<TankstellenClass> listeErzeugen(string Ort, string Strecke, string type)
+        /// <summary>
+        /// Erstellt eine Liste von Tankstellen basierend auf Ort, Radius und Kraftstofftyp.
+        /// Holt dazu Geokoordinaten und ruft die Tankerkönig-API auf.
+        /// </summary>
+        internal static List<JsonClassTankstellen> listeErzeugen(string Ort, string Strecke, string type)
         {
             // Geocatcher Url erzeugen
-            string urlGeoString = UrlClass.UrlErzeugen(Ort, "660f9badcf82c796643356cao717caa");
+            string urlGeoString = UrlBuilderClass.UrlErzeugen(Ort);
 
             // lat und lon erzeugen
-            JsonClass.JsonString(urlGeoString, out string lat, out string lon);
+            HttpRequestClass.JsonString(urlGeoString, out string lat, out string lon);
 
             // Tankerkönig Url erzeugen
-            string urlTankeString = UrlClass.UrlErzeugen(lat, lon, "d15b506d-7f13-2856-0cbb-f9b6251a5580", Strecke, type);
+            string urlTankeString = UrlBuilderClass.UrlErzeugen(lat, lon, Strecke, type);
+
+            if (urlTankeString == null)
+            {
+            // Vorgang abbrechen, da kein API-Key vorhanden
+            return new List<JsonClassTankstellen>();
+            }
 
             //Tankerkönig Json Holen, Deserialisieren und Liste erzeugen
-            JsonClass.JsonString(urlTankeString, out string Json);
+            HttpRequestClass.JsonString(urlTankeString, out string Json);
+            if(Json == null)
+            {
+                return null;
+            }
             Root root = JsonConvert.DeserializeObject<Root>(Json);
-            List<TankstellenClass> stations = root.stations;
+            List<JsonClassTankstellen> stations = root.stations;
             return stations;
         }
     }

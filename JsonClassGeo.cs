@@ -1,5 +1,6 @@
 ﻿namespace TankstellenApp
 {
+    // Klasse um die Json-Daten von der Geo-API zu verarbeiten
     internal class JsonClassGeo
     {
         public int place_id { get; set; }
