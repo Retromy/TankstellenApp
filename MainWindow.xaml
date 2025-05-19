@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="650">
+        Title="MainWindow" Height="500" Width="700">
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
@@ -15,26 +15,23 @@
 
     <Grid Margin="25">
 
-        <!--GRID-->
+        <!-- GRID welches den Bildschirm in 5+ Zeilen teilt -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--Elemente-->
         <!--1. Zeile-->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-
-            <!--Eingabe Postleitzahl-->
-            <TextBox x:Name="txtPLZ" Width="150" Height="32" Margin="0,0,25,0" VerticalAlignment="Center" FontSize="15" Text="PLZ oder Ort"
+            <TextBox x:Name="txtBox_PLZ" Width="120" Height="32" Margin="0,0,25,0" VerticalAlignment="Center" FontSize="15" Text="PLZ oder Ort"
             TextAlignment="Center" VerticalContentAlignment="Center" GotFocus="txtPLZ_GotFocus"/>
-            <Button Content="Eingabe" x:Name="btnEingabe" Click="btnEingabe_Click"/>
-            <Button Content="Speichern" x:Name="Speichern" Click="Speichern_Click"/>
+            <Button Content="Eingabe" x:Name="btn_Eingabe" Click="btn_Eingabe_Click"/>
+            <Button Content="Speichern" x:Name="btn_Speichern" Click="btn_Speichern_Click"/>
+            <Button Content="Laden" x:Name="btn_Laden" Click="btn_Laden_Click"/>
             <Button x:Name="Config" Style="{StaticResource configButton}" Click="Config_Click"/>
         </StackPanel>
 
@@ -47,13 +44,14 @@
        VerticalAlignment="Center"/>
         </StackPanel>
 
+        <!-- Radiobutton -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
             <RadioButton GroupName="Sorte" x:Name="Benzin" Content="Benzin" IsChecked="True"/>
             <RadioButton GroupName="Sorte" x:Name="Diesel" Content="Diesel"/>
             <RadioButton GroupName="Sorte" x:Name="E10" Content="E10"/>
         </StackPanel>
 
-        <!-- List mit den Ergebnissen -->
+        <!-- Listview mit den Ergebnissen -->
         <ListView Grid.Row="3" x:Name="priceListView" Margin="10" >
             <ListView.View>
                 <GridView>
@@ -65,6 +63,7 @@
                     <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Place}"/>
                 </GridView>
             </ListView.View>
+            
         </ListView>
     </Grid>
 </Window>

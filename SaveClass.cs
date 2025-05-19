@@ -6,12 +6,13 @@ namespace TankstellenApp
 {
     public static class SaveClass
     {
-        internal static void DateiSpeichern(List<TankstellenClass> neueListe)
+        // speichert eine Liste von JsonClassTankstellen in eine CSV-Datei
+        public static void DateiSpeichern(List<JsonClassTankstellen> neueListe)
         {
-            List<TankstellenClass> liste = neueListe;
+            List<JsonClassTankstellen> liste = neueListe;
             Int32 unixTimestamp = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
 
-            string csvFilePath = @AppDomain.CurrentDomain.BaseDirectory.ToString() + DateTime.Now.ToString("yyyyMMdd") + ".csv";
+            string csvFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DateTime.Now.ToString("yyyyMMdd") + ".csv");
             //MessageBox.Show(csvFilePath);
             using (var writer = new StreamWriter(csvFilePath))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
@@ -20,4 +21,5 @@ namespace TankstellenApp
             }
         }
     }
+
 }

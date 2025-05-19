@@ -1,0 +1,47 @@
+﻿<Window x:Class="TankstellenApp.Config"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TankstellenApp"
+        mc:Ignorable="d"
+        Title="Config" Height="450" Width="800">
+
+    <Window.Background>
+        <!-- Hintergrundbild -->
+        <ImageBrush ImageSource="/Images/key.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+
+    <Grid>
+
+        <!-- äußeres Stackpanel das die 2 Blöcke mit den Textcontainern und dem Button aufnimmt -->
+        <StackPanel Orientation="Vertical">
+
+            <!-- inneres Stackpanel damit Label und Textblock untereinander sind -->
+            <StackPanel Orientation="Vertical" Margin="35">
+                <Label x:Name="lbl_GeoApiKey" Content="Gespeicherter Geo Api Key:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
+                <TextBlock x:Name="txtBlo_GeoApiKey" Margin="10" Foreground="White"/>
+
+                <!-- Stackpanel das die TextBox und den Button nebeneinander aufnimmt -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtBox_GeoApiKey" Width="300" Text="Eingabefeld für Api-Key Geocatcher" VerticalAlignment="center" GotFocus="txtBox_GeoApiKey_GotFocus"/>
+                    <Button x:Name="btn_SaveGeoApiKey" Content="Speichern" Click="btn_SaveGeoApiKey_Click" Width="100" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- inneres Stackpanel damit Label und Textblock untereinander sind -->
+            <StackPanel Orientation="Vertical" Margin="35">
+                <Label x:Name="lbl_TankerkoenigApiKey" Content="Gespeicherter Tankerkönig Api Key:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold" Foreground="White" />
+                <TextBlock x:Name="txtBlo_TankApiKey" Margin="10" Foreground="White"/>
+
+                <!-- Stackpanel das die TextBox und den Button nebeneinander aufnimmt -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtBox_TankApiKey" Width="300" Text="Eingabefeld für Api-Key Geocatcher" VerticalAlignment="Center" GotFocus="txtBox_TankApiKey_GotFocus"/>
+                    <Button x:Name="btn_SaveTankApiKey" Content="Speichern" Click="btn_SaveTankApiKey_Click" Width="100" Margin="5"/>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+        <Label Content="Image by Freepik (www.freepik.com)" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White"/>
+    </Grid>
+</Window>

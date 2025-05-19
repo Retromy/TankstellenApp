@@ -4,15 +4,19 @@
              xmlns:local="clr-namespace:TankstellenApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <LinearGradientBrush x:Key="BlackButton" StartPoint="0,-1" EndPoint="1,1">
+
+        <!-- Farbverlauf für Buttons, wird im Standard-Button-Style verwendet und ersetzt damit das Standard-Design aller Buttons in der Anwendung.-->
+        <LinearGradientBrush x:Key="ButtonNeu" StartPoint="0,-1" EndPoint="1,1">
             <GradientStop Color="Black" Offset="0" />
             <GradientStop Color="Yellow" Offset="0.4" />
             <GradientStop Color="orange" Offset="0.7" />
             <GradientStop Color="black" Offset="1" />
         </LinearGradientBrush>
+
+        <!-- Standard-Button-Style: Ersetzt das Standard-Design aller Buttons -->
         <Style TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="{StaticResource BlackButton}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNeu}" />
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="120"/>
             <Setter Property="Margin" Value="3"/>
@@ -22,30 +26,43 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
+                        
                         <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
-                            <!--Outer Rectangle with rounded corners.-->
+                            <!-- Äußerer Rahmen mit abgerundeten Ecken -->
                             <Rectangle x:Name="outerRectangle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="#616161" RadiusX="20" RadiusY="10" StrokeThickness="3" Fill="Transparent" />
-                            <!--Inner Rectangle with rounded corners.-->
+                            <!-- Innerer Bereich mit Farbverlauf -->
                             <Rectangle x:Name="innerRectangle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Transparent" StrokeThickness="10" Fill="{TemplateBinding Background}" RadiusX="20" RadiusY="7" />
-                            <!--Present Content (text) of the button.-->
+                            <!-- Overlay für gedrückten Zustand -->
+                            <Rectangle x:Name="pressedOverlay" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Black" Opacity="0.4" RadiusX="20" RadiusY="10" Visibility="Collapsed"/>
+                            <!-- Button-Inhalt (Text, Icon, etc.) -->
                             <DockPanel Name="BlackButtonPanel">
                                 <ContentPresenter x:Name="BlackButtonPresenter" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding  Content}" TextBlock.Foreground="Black" />
                             </DockPanel>
                         </Grid>
+                        
+                        <ControlTemplate.Triggers>
+                            <!-- Zeigt Overlay, wenn Button gedrückt wird -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="pressedOverlay" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
+        <!-- Style für den Konfigurations-Button (runder Button mit Zahnrad-Icon) -->
         <Style x:Key="configButton" TargetType="Button">
             <Setter Property="Width" Value="30"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Background" Value="#cd5c5c"/>
+            <Setter Property="Background" Value="#ffa500"/>
             <Setter Property="Foreground" Value="#474747"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
+                        
                         <Grid>
                             <!-- Äußerer Ring -->
                             <Ellipse
@@ -65,11 +82,14 @@
                                 VerticalAlignment="Center"
                                 RecognizesAccessKey="True"/>
                         </Grid>
+                        
                         <ControlTemplate.Triggers>
+                            <!-- Farbänderung beim Drücken -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="PART_InnerEllipse" Property="Fill" Value="LightGray"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
+                        
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
