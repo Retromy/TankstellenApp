@@ -1,0 +1,70 @@
+﻿<Window x:Class="TankstellenApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="650">
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+            <GradientStop Color="#1c86ee" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid Margin="25">
+
+        <!--GRID-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Elemente-->
+        <!--1. Zeile-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+
+            <!--Eingabe Postleitzahl-->
+            <TextBox x:Name="txtPLZ" Width="150" Height="32" Margin="0,0,25,0" VerticalAlignment="Center" FontSize="15" Text="PLZ oder Ort"
+            TextAlignment="Center" VerticalContentAlignment="Center" GotFocus="txtPLZ_GotFocus"/>
+            <Button Content="Eingabe" x:Name="btnEingabe" Click="btnEingabe_Click"/>
+            <Button Content="Speichern" x:Name="Speichern" Click="Speichern_Click"/>
+            <Button x:Name="Config" Style="{StaticResource configButton}" Click="Config_Click"/>
+        </StackPanel>
+
+        <!-- Schieberegler -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <Label Content="Radius (km):" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Slider x:Name="radiusSlider" Minimum="5" Maximum="20" Value="5" Width="350" 
+            TickPlacement="BottomRight" TickFrequency="5" />
+            <TextBlock Text="{Binding ElementName=radiusSlider, Path=Value, StringFormat={}{0:F2}}" 
+       VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+            <RadioButton GroupName="Sorte" x:Name="Benzin" Content="Benzin" IsChecked="True"/>
+            <RadioButton GroupName="Sorte" x:Name="Diesel" Content="Diesel"/>
+            <RadioButton GroupName="Sorte" x:Name="E10" Content="E10"/>
+        </StackPanel>
+
+        <!-- List mit den Ergebnissen -->
+        <ListView Grid.Row="3" x:Name="priceListView" Margin="10" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tankstelle" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Preis" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Straße" DisplayMemberBinding="{Binding Street}"/>
+                    <GridViewColumn Header="HausNr." DisplayMemberBinding="{Binding HouseNumber}"/>
+                    <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PostCode}"/>
+                    <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Place}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
