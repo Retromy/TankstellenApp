@@ -3,6 +3,7 @@ TankstellenApp – Funktionsübersicht
 Mit diesem Programm können aktuelle Kraftstoffpreise von Tankstellen in Deutschland abgerufen und angezeigt werden.
 
 Vor der ersten Nutzung:
+- Die App wurde als portable Anwendung veröffentlicht. Das heißt, sie benötigt keine Installation. Die ZIP-Datei einfach entpacken und die EXE-Datei öffnen.
 - Für die Nutzung des Programms werden zwei gültige API-Keys benötigt:
   - Geo-API-Key (für die Umwandlung von Ort/PLZ in Koordinaten)
   - Tankerkönig-API-Key (für das Abrufen der Kraftstoffpreise)
@@ -30,6 +31,6 @@ Erläuterung der Funktionen:
 - Button "Eingabe": Startet die Suche nach Tankstellen im definierten Bereich.
 - Button "Speichern": Speichert die aktuelle Suchabfrage als CSV-Datei.
 - Button "Laden": Öffnet gespeicherte Suchabfragen.
-- Runder Button (Zahnrad): Öffnet das Konfigurationsmenü zur Verwaltung der API-Keys. Nach Eingabe und Speichern der Keys können diese sofort verwendet werden. Das Fenster muss danach geschlossen werden.
+- Runder Button (Zahnrad): Öffnet das Konfigurationsmenü zur Verwaltung der API-Keys. Nach Eingabe und Speichern der Keys können diese sofort verwendet werden. Das Fenster kann danach einfach geschlossen werden.
 
 Erstellt mit .NET 8 und WPF.
